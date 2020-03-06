@@ -9,19 +9,6 @@ import Edit from './components/Edit'
 import Help from './components/Help'
 import Error from './components/Error'
 import PortfolioRoutes from './components/routers/PortfolioRoutes'
-import ReduxFun from './components/Redux-101'
-import {store} from './store/Store'
-import {add, remove} from './actions/Action'
-
-
-
-store.subscribe(()=>{
-  console.log(store.getState())
-})
-
-const expenseOne = store.dispatch(add({description : 'rent', amount : 15000}))
-const expenseTwo = store.dispatch(add({description : 'coffee', amount : 1500}))
-store.dispatch(remove(expenseOne))
 
 
 
@@ -48,9 +35,7 @@ function App() {
   )
   return (
     <div className="App">
-      {/* {routes} */}
-      {/* <ReduxFun /> */}
-     
+      {routes}
     </div>
   );
 }
