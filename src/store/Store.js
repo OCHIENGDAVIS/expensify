@@ -24,6 +24,18 @@ const expensesReducer = (state=[], action)=>{
             return [...state, action.expense]
         case 'REMOVE':
             return state.filter(expense =>expense.id !== action.expense.id)
+        case 'EDIT':
+            return state.map((expense)=>{
+                if(expense.id === action.id){
+                    return{
+                        ...expense,
+                        ...action.updates
+                    }
+                }else{
+                    return expense
+                }
+            })
+
         default :
             return state
     }
@@ -38,6 +50,26 @@ const filterReducerDefault = {
 }
 const filterReducer = (state=filterReducerDefault, action)=>{
     switch(action.type){
+        case 'SET_TEXT':
+            return{
+                ...state,
+                text : action.text
+            }
+        case 'SORT_BY_DATE':
+            return {
+                ...state,
+                sortBy : action.text
+            }
+        case 'SET_START_DATE':
+            return {
+                ...state,
+                startDate : action.startDate
+            }
+        case 'SET_END_DATE':
+            return {
+                ...state,
+                endDate : action.endDate
+            }
         default : 
             return state
     }

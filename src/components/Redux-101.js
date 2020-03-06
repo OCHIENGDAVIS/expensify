@@ -6,7 +6,6 @@ import {createStore} from 'redux'
 
 const countReducer = (state, action)=>{
     switch(action.type){
-        
         default:
             return state
     }
@@ -106,19 +105,6 @@ const address = [
 ]
 const [house, estate, city, country ] = address
 console.log(`you are in ${city} ${estate}`)
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
