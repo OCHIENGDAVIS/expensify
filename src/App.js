@@ -24,7 +24,7 @@ function App() {
           <Route component={Error} />
         </Switch>
         <hr />
-        <h2>This is the portfolio Routes</h2>
+        <h2>Portfolio</h2>
         <NavLink to="/home">Home</NavLink>
         <NavLink to="/about">About</NavLink>
         <NavLink to="/contact">Contact</NavLink>
