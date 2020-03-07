@@ -1,14 +1,31 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {BrowserRouter} from 'react-router-dom'
+import {Provider} from 'react-redux'
+
+import {add, edit, setFilter} from './actions/Action'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import {BrowserRouter} from 'react-router-dom'
+import {store} from './store/Store'
+
+const ex = store.dispatch(add({description : 'Exams fee'}))
+store.dispatch(add({description : 'Exams fee', note:'Some super money to eat'}))
+store.dispatch(setFilter({text: 'Some super money to eat'}))
+
+
+setTimeout(()=>{
+    store.dispatch(edit({id : ex.expense.id, updates: {description : 'Some mony i used in partying hard'}}))
+}, 2000)
+
 const app = (
-    <BrowserRouter>
+    <Provider store={store}>
+        <BrowserRouter>
         <App />
-    </BrowserRouter>
+        </BrowserRouter>
+    </Provider>        
 )
+    
 
 ReactDOM.render(app, document.getElementById('root'));
 
