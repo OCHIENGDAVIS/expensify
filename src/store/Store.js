@@ -1,4 +1,5 @@
 import {createStore, combineReducers} from 'redux'
+import moment from 'moment'
 
 // const demoState = {
 //     expenses : [
@@ -23,8 +24,10 @@ const expensesReducer = (state=[], action)=>{
         case 'ADD':
             return [...state, action.expense]
         case 'REMOVE':
+			console.log(action)
             return state.filter(expense =>expense.id !== action.expense.id)
         case 'EDIT':
+			console.log(action)
             return state.map((expense)=>{
                 if(expense.id === action.id){
                     return{
@@ -45,8 +48,8 @@ const expensesReducer = (state=[], action)=>{
 const filterReducerDefault = {
     text : '',
     sortBy : 'date',
-    startDate : undefined,
-    endDate : undefined
+    startDate : moment().startOf('month'),
+    endDate : moment().endOf('month')
 }
 const filterReducer = (state=filterReducerDefault, action)=>{
     switch(action.type){
@@ -80,6 +83,6 @@ export const store = createStore(
     combineReducers({
         expenses : expensesReducer,
         filters : filterReducer
-    })
+    }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

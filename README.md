@@ -1,8 +1,7 @@
 
 ## Expensify
 
-This is a simple project to track your expenses[Create React App](https:linktoliveproject).
-
+This is a simple project to track your expenses
 
 
 Coded in react js

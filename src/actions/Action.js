@@ -29,7 +29,7 @@ export const remove = ({expense}={})=>{
 
 // Edit expense
 
-export const edit = ({id, updates}={})=>{
+export const edit = (id, updates)=>{
     return {
         type : 'EDIT',
         id,
