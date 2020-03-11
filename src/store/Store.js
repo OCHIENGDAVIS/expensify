@@ -1,5 +1,8 @@
-import {createStore, combineReducers} from 'redux'
+import {createStore, combineReducers, applyMiddleware, compose} from 'redux'
+import thunk from 'redux-thunk'
 import moment from 'moment'
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 // const demoState = {
 //     expenses : [
@@ -25,7 +28,7 @@ const expensesReducer = (state=[], action)=>{
             return [...state, action.expense]
         case 'REMOVE':
 			console.log(action)
-            return state.filter(expense =>expense.id !== action.expense.id)
+            return state.filter(expense =>expense.id !== action.id)
         case 'EDIT':
 			console.log(action)
             return state.map((expense)=>{
@@ -37,7 +40,10 @@ const expensesReducer = (state=[], action)=>{
                 }else{
                     return expense
                 }
-            })
+			})
+		case 'SET_EXPENSES':
+			console.log(action.expenses)
+			return [...state, action.expenses]
 
         default :
             return state
@@ -83,6 +89,8 @@ export const store = createStore(
     combineReducers({
         expenses : expensesReducer,
         filters : filterReducer
-    }), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	}),
+	composeEnhancer(applyMiddleware(thunk))
+	//  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )
 

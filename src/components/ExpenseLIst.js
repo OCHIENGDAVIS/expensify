@@ -6,14 +6,19 @@ import getVisibleExpenses from '../selectors/Selector'
 
 
 const ExpenseList = (props)=>{
+	console.log(props.expenses)
+	let expenses = <h3>Loading........</h3>
+	if(props.expenses.length > 0){
+		expenses = props.expenses.map((expense, i)=>{	
+			console.log(expense)
+			return <ExpenseListItem {...expense} key={i} />
+		})
+	}
     return(
         <div>
             <h2>Your Expenses List</h2>
-            { props.expenses.length > 0 ? <p>{props.expenses[0].description}</p> : <p>No expense to display</p>}
             {
-                props.expenses.map((expense)=>{
-                    return <ExpenseListItem expense={expense} key={expense.id} />
-                })
+                expenses
             }
             
         </div>

@@ -1,18 +1,13 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import ExpenseForm from './ExpenseForm'
-import {edit, remove} from '../actions/Action'
-
-
-
+import {edit, startRemove} from '../actions/Action'
 
 
 class  Edit extends Component{
 	removeItem = ()=>{
-        const newExpense = {
-            expense : this.props.expense
-        }
-		this.props.dispatch(remove(newExpense))
+
+		this.props.remove(this.props.match.params.id)
 		this.props.history.push('/')
         
     }
@@ -41,4 +36,10 @@ const mapStateToProps = ((state, props)=>{
 	}
 })
 
-export default connect(mapStateToProps)(Edit)
+const mapDispatchToProps = (dispatch)=>{
+	return {
+		remove : (id)=>dispatch(startRemove(id))
+	}
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Edit)

@@ -3,14 +3,13 @@ import {Link} from 'react-router-dom'
 
 
 const ExpenseListItem = (props)=>{
-    
-    
+    console.log(props)
     return (
         <div>
-            <Link to={`/edit/${props.expense.id}`}><h3>{props.expense.description}</h3></Link>
-            {props.expense.note ? <small>{props.expense.note}</small> : null}
-            <p><strong>KSHs . {props.expense.amount}</strong></p>
-            <p>Created at : {props.expense.createdAt}</p>
+			{console.log(props.id)}
+            <Link to={`/edit/${props.id}`}><h3>{props.description}</h3></Link>
+            {props.note ? <small>{props.expense.note}</small> : null}
+            {props.amount ? <p><strong>KSHs . {props.amount}</strong></p> : null}
               <br />
             -------------------------------------------------------
     

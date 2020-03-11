@@ -1,30 +1,49 @@
-import {v4 as uuidv4 } from  'uuid' 
+
+import axios from 'axios'
 
 // Add expense 
 
-export const add = ({ description='', note='', amount =0, createdAt=0 }={})=>{
+const add = (expense)=>{
     return {
         type : 'ADD',
-        expense : {
-            id : uuidv4(),
-            description,
-            note,
-            amount,
-            createdAt
+        expense
+          
 
-        }
     }
+}
+export const  startAddExpense = (expenseData)=>{
+	return (dispatch)=>{
+		axios.post('http://localhost:8000/api/expensify/create/', expenseData).then((res)=>{
+			console.log(res.data)
+			dispatch(add(expenseData))
+		})
+		.catch((error)=>{
+			console.log(error)
+		})
+	}
 }
 
 //Remove expense
 
-export const remove = ({expense}={})=>{
+const remove = (id)=>{
     return {
         type: 'REMOVE',
-        expense
+        id
 
     }
 
+}
+export const startRemove = (id)=>{
+	return (dispatch)=>{
+		axios.delete(`http://localhost:8000/api/expensify/${id}/delete/`)
+		.then((res)=>{
+			console.log(res.data)
+			dispatch(remove(id))
+		})
+		.catch((error)=>{
+			console.log(error)
+		})
+	}
 }
 
 // Edit expense
@@ -37,6 +56,34 @@ export const edit = (id, updates)=>{
        
     }
 }
+
+// Setting initial array values (Bootstrapping the apllication)
+
+const setExpenses = (expenses)=>{
+	return{
+		type : 'SET_EXPENSES',
+		expenses
+	}
+}
+
+export const startSetExpenses = ()=>{
+	return (dispatch)=>{
+		axios.get('http://localhost:8000/api/expensify/')
+		.then((res)=>{
+			console.log(res.data)
+			const expenses = res.data
+			dispatch(setExpenses(expenses))
+		}).catch((error)=>{
+			console.log(error)
+		})
+	}
+}
+
+
+
+
+
+
 
 // set TextFilter
 
@@ -83,3 +130,7 @@ export const setEndDate = (endDate=1250)=>{
         endDate
     }
 }
+
+
+
+

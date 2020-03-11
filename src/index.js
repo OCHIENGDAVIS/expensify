@@ -2,17 +2,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter} from 'react-router-dom'
 import {Provider} from 'react-redux'
-
-import {add, edit} from './actions/Action'
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {store} from './store/Store'
+import {startSetExpenses} from './actions/Action'
 
-const ex = store.dispatch(add({description : 'Exams fee'}))
-store.dispatch(add({description : 'Exams fee', note:'Some super money to eat', amount: 4500}))
-store.dispatch(add({description : 'Internet fee', note:'Some super money to eat', createdAt: 1000}))
-store.dispatch(add({description : 'Food', note:'Some super money to eat', amount: 109500}))
+
+// store.dispatch(startAddExpense({description: 'Remove me', amont: 9000}))
+store.dispatch(startSetExpenses())
 
 const app = (
     <Provider store={store}>
